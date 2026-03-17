@@ -319,12 +319,42 @@ main {
     border-right: 1px solid rgba(255,255,255,0.06);
     border-top: 1px solid rgba(255,255,255,0.06);
     flex-shrink: 0;
-    transition: background-color 2s ease;
+    transition: transform 0.5s ease, background-color 2s ease;
     cursor: default;
+    z-index: 1;
 }
 
 .box-cell.hovered {
-    transition: background-color 0s;
+    transform: translate(-6px, -6px);
+    transition: transform 0.1s ease, background-color 0s;
+    z-index: 10;
+}
+
+/* Pseudo elements for the 3D layers underneath the cell */
+.box-cell::before, .box-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Inherit the randomized inline background color from JS */
+    background-color: inherit;
+    opacity: 0;
+    transition: all 0.5s ease;
+    border-right: 1px solid rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.box-cell.hovered::before {
+    transform: translate(3px, 3px);
+    opacity: 0.6;
+    z-index: -1;
+    transition: all 0.1s ease;
+}
+
+.box-cell.hovered::after {
+    transform: translate(6px, 6px);
+    opacity: 0.3;
+    z-index: -2;
+    transition: all 0.1s ease;
 }
 
 .box-cell .plus {
@@ -335,6 +365,27 @@ main {
     width: 40px;
     height: 24px;
     color: rgba(255,255,255,0.07);
+}
+
+/* Icon Container on Hover */
+.cell-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    color: #fff;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-cell.hovered .cell-icon {
+    opacity: 1;
+    transition: opacity 0.1s ease;
 }
 
 #boxes-vignette {
@@ -358,89 +409,199 @@ main {
 }
 
 /* SECTION 2: FEATURES GRID */
-.features-grid {
+.lp-pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     width: 100%;
 }
 
-.feature-card {
+.lp-price-card {
     position: relative;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
+    border-radius: 24px;
     padding: 2.5rem;
-    min-height: 200px;
+    text-align: left;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    justify-content: space-between;
+    min-height: 440px;
+    transition: transform 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     cursor: pointer;
 }
 
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at center, rgba(209, 70, 30, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 0;
+.lp-price-card:hover {
+    transform: scale(1.05);
 }
 
-.card-front {
+.lp-price-card-z {
     position: relative;
-    z-index: 1;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 10;
 }
 
-.card-front h3 {
-    font-size: 1.5rem;
+.lp-price-tag {
+    display: block;
+    font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin: 0;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
 }
 
-.card-expanded {
-    position: absolute;
-    top: 50%;
-    left: 2.5rem;
-    right: 2.5rem;
-    transform: translateY(-50%) translateY(20px);
-    opacity: 0;
-    z-index: 1;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.lp-price-amt {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
+    transition: transform 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    transform-origin: left bottom;
 }
 
-.card-expanded p {
+.lp-price-card:hover .lp-price-amt {
+    transform: scale(1.05);
+}
+
+.lp-price-freq {
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: 0.6;
+}
+
+.lp-price-best {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.lp-price-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.lp-price-features li {
     font-size: 0.95rem;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
+}
+
+.lp-price-btn {
+    position: relative;
+    z-index: 10;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.15);
+    color: inherit;
+    border: 1px solid rgba(255,255,255, 0.2);
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: auto;
+}
+
+.lp-price-btn.light {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0,0,0,0.1);
+}
+
+.lp-price-btn:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.lp-price-btn.light:hover {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Squishy SVG Background Animation */
+.lp-price-sq-svg {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    pointer-events: none;
+    z-index: 0;
+    transition: transform 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    transform-origin: bottom right;
+}
+
+.lp-price-card:hover .lp-price-sq-svg {
+    transform: scale(1.5);
+}
+
+.lp-price-sq-svg .sq-circle, 
+.lp-price-sq-svg .sq-ellipse {
+    transition: transform 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) 0.1s;
+    transform-origin: center;
+}
+
+.lp-price-card:hover .sq-circle {
+    transform: translateY(-25px) scaleY(0.5);
+}
+
+.lp-price-card:hover .sq-ellipse {
+    transform: translateY(-25px) scaleY(2.25);
+}
+
+/* Trial Banner */
+.lp-trial-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    margin-top: 4rem;
+    text-align: left;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.trial-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.trial-text p {
+    color: rgba(255,255,255,0.6);
     margin: 0;
+    font-size: 0.95rem;
 }
 
-/* Hover States for Expanding Card */
-.feature-card:hover {
-    border-color: rgba(209, 70, 30, 0.5);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    transform: translateY(-5px);
-}
-.feature-card:hover::before {
-    opacity: 1;
-}
-.feature-card:hover .card-front {
-    transform: translateY(-30px) scale(0.9);
-    opacity: 0.5;
-}
-.feature-card:hover .card-expanded {
-    opacity: 1;
-    transform: translateY(-50%) translateY(10px);
+.lp-dark-btn {
+    padding: 1rem 2rem;
+    background: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
+.lp-dark-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+    .lp-trial-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
 /* SECTION 3: TECH SHOWCASE CUBE */
 .split-layout {
     display: flex;
@@ -701,6 +862,15 @@ main {
     overflow: hidden;
 }
 
+#globe-webgl-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: auto; /* Allow interaction if desired */
+    transform: translateX(10%); /* Shift it right slightly to match the original layout */
+}
+
 /* MARS GLOBE (Bottom Left) */
 .mars-globe-container {
     position: absolute;
@@ -850,47 +1020,83 @@ main {
     box-shadow: 0 0 10px rgba(255,255,255,0.2) inset;
 }
 
-/* SECTION 6: TRUST / SECURITY (3D Typography) */
+/* SECTION 6: TRUST / SECURITY (Interactive 3D Typography) */
 .trust-section {
-    perspective: 1000px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
-.trust-typography {
+
+.interactive-3d-text-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    transform: rotateX(15deg) rotateY(-10deg);
-    transform-style: preserve-3d;
-}
-.word-3d {
-    font-size: clamp(4rem, 10vw, 8rem);
-    font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    color: transparent;
-    -webkit-text-stroke: 2px rgba(255,255,255,0.2);
     position: relative;
-    transition: all 0.5s ease;
-    text-shadow: 
-        0 1px 0 #333,
-        0 2px 0 #222,
-        0 3px 0 #111,
-        0 4px 10px rgba(209, 70, 30, 0.4);
+    z-index: 10;
+    /* Variables driven by JS */
+    --x: 0;
+    --y: 0;
 }
-.word-3d:hover {
+
+.block-text {
+    font-size: clamp(5rem, 15vw, 12rem);
+    font-weight: 900;
+    line-height: 0.85;
+    margin: 0;
+    text-transform: uppercase;
     color: var(--text-color);
-    -webkit-text-stroke: 0px;
+    letter-spacing: -0.04em;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    /* The 3D effect driven by mouse position */
+    transform: perspective(1000px) rotateX(calc(var(--y) * 20deg)) rotateY(calc(var(--x) * -20deg));
+    
+    /* Deep solid shadow for the 3D block look */
     text-shadow: 
-        0 1px 0 #ccc,
-        0 2px 0 #aaa,
-        0 3px 0 #888,
-        0 4px 0 #666,
-        0 5px 0 #444,
-        0 10px 20px rgba(209, 70, 30, 0.8),
-        0 20px 40px rgba(0,0,0,0.8);
-    transform: translateZ(30px);
-    cursor: default;
+        calc(var(--x) * -1px) calc(var(--y) * -1px) 0 #888,
+        calc(var(--x) * -2px) calc(var(--y) * -2px) 0 #777,
+        calc(var(--x) * -3px) calc(var(--y) * -3px) 0 #666,
+        calc(var(--x) * -4px) calc(var(--y) * -4px) 0 #555,
+        calc(var(--x) * -5px) calc(var(--y) * -5px) 0 #444,
+        calc(var(--x) * -6px) calc(var(--y) * -6px) 0 #333,
+        calc(var(--x) * -7px) calc(var(--y) * -7px) 0 #222,
+        calc(var(--x) * -8px) calc(var(--y) * -8px) 0 #111,
+        calc(var(--x) * -15px) calc(var(--y) * -15px) 20px rgba(0,0,0,0.8),
+        calc(var(--x) * -30px) calc(var(--y) * -30px) 40px rgba(209, 70, 30, 0.4);
+}
+
+.block-text.outline-text {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text-color);
+    /* Lighter shadows for the outlined middle word */
+    text-shadow: 
+        calc(var(--x) * -1px) calc(var(--y) * -1px) 0 rgba(255,255,255,0.2),
+        calc(var(--x) * -2px) calc(var(--y) * -2px) 0 rgba(255,255,255,0.2),
+        calc(var(--x) * -3px) calc(var(--y) * -3px) 0 rgba(255,255,255,0.1),
+        calc(var(--x) * -15px) calc(var(--y) * -15px) 20px rgba(0,0,0,0.5);
+}
+
+/* Hover glitch effect using the data-text attribute */
+.block-text:hover::before,
+.block-text:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0.8;
+    pointer-events: none;
+}
+.block-text:hover::before {
+    color: var(--mars-orange);
+    transform: translate(-3px, 2px);
+    z-index: -1;
+}
+.block-text:hover::after {
+    color: #88c0d0;
+    transform: translate(3px, -2px);
+    z-index: -2;
 }
 
 /* SECTION 8: FINAL CTA */
@@ -941,11 +1147,17 @@ main {
     min-height: auto;
     padding: 6rem 10%;
 }
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
 .card-container {
     perspective: 1000px;
     width: 100%;
-    max-width: 30rem;
-    margin: 2rem auto;
 }
 .card-body {
     transform-style: preserve-3d;

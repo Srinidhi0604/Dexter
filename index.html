@@ -75,52 +75,108 @@
                     <p class="section-subtext">Powerful tools designed for adaptability and resilience.</p>
                 </div>
                 
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="card-front"><h3>Instant Liquidity</h3></div>
-                        <div class="card-expanded"><p>Experience unparalleled speed and capital efficiency without intermediaries slowing down your settlement.</p></div>
+                <div class="features-grid lp-pricing-grid">
+                    <!-- Card 1 -->
+                    <div class="lp-price-card" style="background-color: #f7f5ef; color: #111;">
+                        <div class="lp-price-card-z">
+                            <span class="lp-price-tag">Basic</span>
+                            <div class="lp-price-amt">Free<span class="lp-price-freq">/mo</span></div>
+                            <p class="lp-price-best">For independent operators</p>
+                            <ul class="lp-price-features">
+                                <li>• Smart Asset Anchoring</li>
+                                <li>• 100tx / month</li>
+                                <li>• Community Discord</li>
+                            </ul>
+                        </div>
+                        <button class="lp-price-btn light">Get it now</button>
+                        
+                        <!-- Squishy SVG Background -->
+                        <svg width="320" height="384" viewBox="0 0 320 384" fill="none" class="lp-price-sq-svg">
+                            <circle class="sq-circle" cx="160.5" cy="114.5" r="101.5" fill="#000" fill-opacity="0.05" />
+                            <ellipse class="sq-ellipse" cx="160.5" cy="265.5" rx="101.5" ry="43.5" fill="#000" fill-opacity="0.05" />
+                        </svg>
                     </div>
-                    <div class="feature-card">
-                        <div class="card-front"><h3>Cross-Chain Sync</h3></div>
-                        <div class="card-expanded"><p>Seamlessly transition assets between varying network protocols with guaranteed cryptographic state anchors.</p></div>
+
+                    <!-- Card 2 -->
+                    <div class="lp-price-card" style="background-color: var(--mars-orange); color: #fff;">
+                        <div class="lp-price-card-z">
+                            <span class="lp-price-tag">Pro • Most Popular</span>
+                            <div class="lp-price-amt">₹499<span class="lp-price-freq">/mo</span></div>
+                            <p class="lp-price-best">For growing syndicates</p>
+                            <ul class="lp-price-features">
+                                <li>• Cross-Chain Sync</li>
+                                <li>• Unlimited tx bridging</li>
+                                <li>• Priority Support</li>
+                                <li>• API Access</li>
+                            </ul>
+                        </div>
+                        <button class="lp-price-btn">Get it now</button>
+                        
+                        <!-- Squishy SVG Background -->
+                        <svg width="320" height="384" viewBox="0 0 320 384" fill="none" class="lp-price-sq-svg">
+                            <circle class="sq-circle" cx="160.5" cy="114.5" r="101.5" fill="#fff" fill-opacity="0.15" />
+                            <ellipse class="sq-ellipse" cx="160.5" cy="265.5" rx="101.5" ry="43.5" fill="#fff" fill-opacity="0.15" />
+                        </svg>
                     </div>
-                    <div class="feature-card">
-                        <div class="card-front"><h3>AI Risk Analysis</h3></div>
-                        <div class="card-expanded"><p>Real-time neural monitoring detects anomalies and mitigates vectors before execution.</p></div>
+
+                    <!-- Card 3 -->
+                    <div class="lp-price-card" style="background-color: #111; color: #fff; border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="lp-price-card-z">
+                            <span class="lp-price-tag">Enterprise</span>
+                            <div class="lp-price-amt">Custom<span class="lp-price-freq"></span></div>
+                            <p class="lp-price-best">For global institutions</p>
+                            <ul class="lp-price-features">
+                                <li>• AI Risk Analysis Engine</li>
+                                <li>• Custom Oracles</li>
+                                <li>• 24/7 Dedicated SLA</li>
+                                <li>• On-Prem Deployment</li>
+                            </ul>
+                        </div>
+                        <button class="lp-price-btn">Contact Sales</button>
+                        
+                        <!-- Squishy SVG Background -->
+                        <svg width="320" height="384" viewBox="0 0 320 384" fill="none" class="lp-price-sq-svg">
+                            <circle class="sq-circle" cx="160.5" cy="114.5" r="101.5" fill="#fff" fill-opacity="0.08" />
+                            <ellipse class="sq-ellipse" cx="160.5" cy="265.5" rx="101.5" ry="43.5" fill="#fff" fill-opacity="0.08" />
+                        </svg>
                     </div>
+                </div>
+
+                <!-- Trial Section -->
+                <div class="lp-trial-banner">
+                    <div class="trial-text">
+                        <h3>Start your journey today.</h3>
+                        <p>14-day free trial for startups • 30-day pilot for enterprises • No card required.</p>
+                    </div>
+                    <button class="lp-dark-btn lp-btn-lg">Start Free Trial</button>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: TECHNOLOGY SHOWCASE (3D Media Cube) -->
+        <!-- SECTION 3: IMAGE SHOWCASE (3D Carousel) -->
         <section class="section tech-showcase" id="tech">
             <div class="content-wrapper split-layout">
                 <div class="text-content">
-                    <h2 class="animate-text-reveal">Core Engine</h2>
-                    <p class="section-subtext fade-up-text">Hover to examine the multi-layered architecture powering the ecosystem.</p>
+                    <h2 class="animate-text-reveal">Visual Gallery</h2>
+                    <p class="section-subtext fade-up-text">Explore the assets. Use the controls below to rotate through our multidimensional interface.</p>
+                    
+                    <div class="carousel-controls">
+                        <button id="carousel-prev" class="carousel-btn">&larr; Prev</button>
+                        <button id="carousel-next" class="carousel-btn">Next &rarr;</button>
+                    </div>
                 </div>
                 
-                <!-- 3D Media Cube -->
-                <div class="cube-showcase-container">
-                    <div class="media-cube" id="media-cube">
-                        <div class="cube-face cube-front">
-                            <div class="face-content">AI</div>
-                        </div>
-                        <div class="cube-face cube-back">
-                            <div class="face-content">CHAIN</div>
-                        </div>
-                        <div class="cube-face cube-right">
-                            <div class="face-content">SEC</div>
-                        </div>
-                        <div class="cube-face cube-left">
-                            <div class="face-content">DATA</div>
-                        </div>
-                        <div class="cube-face cube-top">
-                            <div class="face-content">CORE</div>
-                        </div>
-                        <div class="cube-face cube-bottom">
-                            <div class="face-content">SYNC</div>
-                        </div>
+                <!-- 3D Image Carousel -->
+                <div class="carousel-container">
+                    <div class="carousel-3d" id="image-carousel">
+                        <span style="--i:1"><img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=400&h=400&fit=crop" alt="Abstract 1"></span>
+                        <span style="--i:2"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=400&h=400&fit=crop" alt="Abstract 2"></span>
+                        <span style="--i:3"><img src="https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=400&h=400&fit=crop" alt="Abstract 3"></span>
+                        <span style="--i:4"><img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=400&h=400&fit=crop" alt="Abstract 4"></span>
+                        <span style="--i:5"><img src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?q=80&w=400&h=400&fit=crop" alt="Abstract 5"></span>
+                        <span style="--i:6"><img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=400&h=400&fit=crop" alt="Abstract 6"></span>
+                        <span style="--i:7"><img src="https://images.unsplash.com/photo-1618005192384-a83a8bd57fbe?q=80&w=400&h=400&fit=crop" alt="Abstract 7"></span>
+                        <span style="--i:8"><img src="https://images.unsplash.com/photo-1614850715649-1d0106293bd1?q=80&w=400&h=400&fit=crop" alt="Abstract 8"></span>
                     </div>
                 </div>
             </div>
@@ -130,15 +186,15 @@
             <canvas id="globe-webgl-canvas"></canvas>
         </section>
 
-        <!-- SECTION 6: TRUST / SECURITY (3D Typography) -->
+        <!-- SECTION 6: TRUST / SECURITY (Interactive 3D Typography) -->
         <section class="section trust-section" id="trust">
             <div class="content-wrapper centered">
-                <div class="trust-typography">
-                    <span class="word-3d">TRUST</span>
-                    <span class="word-3d">SECURE</span>
-                    <span class="word-3d">VERIFIED</span>
+                <div class="interactive-3d-text-container" id="interactive-text-container">
+                    <h2 class="block-text" data-text="BUILD">BUILD</h2>
+                    <h2 class="block-text outline-text" data-text="TRUST">TRUST</h2>
+                    <h2 class="block-text" data-text="SECURE">SECURE</h2>
                 </div>
-                <p class="section-subtext fade-up-text">100% audited smart contracts with military-grade asset anchoring.</p>
+                <p class="section-subtext fade-up-text" style="margin-top: 2rem;">100% audited smart contracts with military-grade asset anchoring.</p>
             </div>
         </section>
 
@@ -146,16 +202,49 @@
         <section class="section interactive-card-demo" id="interactive-demo">
             <div class="content-wrapper centered">
                 <h2>Experience 3D Depth</h2>
-                <div class="card-container">
-                    <div class="card-body">
-                        <h3 class="card-item" data-translatez="50">Make things float in air</h3>
-                        <p class="card-item" data-translatez="60">Hover over this card to unleash the power of CSS perspective</p>
-                        <div class="card-item image-container" data-translatez="100">
-                            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="thumbnail">
+                <div class="cards-grid">
+                    <!-- Card 1 -->
+                    <div class="card-container">
+                        <div class="card-body">
+                            <h3 class="card-item" data-translatez="50">Nebula Core</h3>
+                            <p class="card-item" data-translatez="60">Harness the power of deep space anomalies for endless energy.</p>
+                            <div class="card-item image-container" data-translatez="100">
+                                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1000&auto=format&fit=crop" alt="Nebula">
+                            </div>
+                            <div class="card-actions">
+                                <a href="#" class="card-item" data-translatez="20">Explore &rarr;</a>
+                                <button class="card-item btn-signup" data-translatez="20">Engage</button>
+                            </div>
                         </div>
-                        <div class="card-actions">
-                            <a href="https://twitter.com/mannupaaji" target="_blank" class="card-item" data-translatez="20">Try now &rarr;</a>
-                            <button class="card-item btn-signup" data-translatez="20">Sign up</button>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card-container">
+                        <div class="card-body">
+                            <h3 class="card-item" data-translatez="50">Mars Habitat</h3>
+                            <p class="card-item" data-translatez="60">Modular living structures designed for extreme planetary conditions.</p>
+                            <div class="card-item image-container" data-translatez="100">
+                                <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=1000&auto=format&fit=crop" alt="Mars Surface">
+                            </div>
+                            <div class="card-actions">
+                                <a href="#" class="card-item" data-translatez="20">View Plans &rarr;</a>
+                                <button class="card-item btn-signup" data-translatez="20">Deploy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card-container">
+                        <div class="card-body">
+                            <h3 class="card-item" data-translatez="50">Quantum Sync</h3>
+                            <p class="card-item" data-translatez="60">Instantaneous data transfer across the inner solar system.</p>
+                            <div class="card-item image-container" data-translatez="100">
+                                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1000&auto=format&fit=crop" alt="Quantum Tech">
+                            </div>
+                            <div class="card-actions">
+                                <a href="#" class="card-item" data-translatez="20">Read Specs &rarr;</a>
+                                <button class="card-item btn-signup" data-translatez="20">Initialize</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,111 +280,175 @@
     <!-- Globe WebGL Component -->
     <script>
     (function () {
+        const R = 2.0; // globe radius
+
         // ── mat4 helpers ──────────────────────────────────────────────────────
         const m = {
-            id: () => new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]),
-            persp(o, fov, asp, n, f) {
-                const t = 1/Math.tan(fov/2), nf = 1/(n-f);
-                o[0]=t/asp;o[1]=0;o[2]=0;o[3]=0; o[4]=0;o[5]=t;o[6]=0;o[7]=0;
-                o[8]=0;o[9]=0;o[10]=(f+n)*nf;o[11]=-1; o[12]=0;o[13]=0;o[14]=2*f*n*nf;o[15]=0; return o;
-            },
-            transl(o, a, [x,y,z]) {
-                if(a===o){o[12]=a[0]*x+a[4]*y+a[8]*z+a[12];o[13]=a[1]*x+a[5]*y+a[9]*z+a[13];o[14]=a[2]*x+a[6]*y+a[10]*z+a[14];o[15]=a[3]*x+a[7]*y+a[11]*z+a[15];}
-                else{for(let i=0;i<12;i++)o[i]=a[i];o[12]=a[0]*x+a[4]*y+a[8]*z+a[12];o[13]=a[1]*x+a[5]*y+a[9]*z+a[13];o[14]=a[2]*x+a[6]*y+a[10]*z+a[14];o[15]=a[3]*x+a[7]*y+a[11]*z+a[15];}
-                return o;
-            },
-            rotX(o, a, r) {
-                const s=Math.sin(r),c=Math.cos(r),[a10,a11,a12,a13,a20,a21,a22,a23]=[a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]];
-                if(a!==o){o[0]=a[0];o[1]=a[1];o[2]=a[2];o[3]=a[3];o[12]=a[12];o[13]=a[13];o[14]=a[14];o[15]=a[15];}
-                o[4]=a10*c+a20*s;o[5]=a11*c+a21*s;o[6]=a12*c+a22*s;o[7]=a13*c+a23*s;
-                o[8]=a20*c-a10*s;o[9]=a21*c-a11*s;o[10]=a22*c-a12*s;o[11]=a23*c-a13*s; return o;
-            },
-            rotY(o, a, r) {
-                const s=Math.sin(r),c=Math.cos(r),[a00,a01,a02,a03,a20,a21,a22,a23]=[a[0],a[1],a[2],a[3],a[8],a[9],a[10],a[11]];
-                if(a!==o){o[4]=a[4];o[5]=a[5];o[6]=a[6];o[7]=a[7];o[12]=a[12];o[13]=a[13];o[14]=a[14];o[15]=a[15];}
-                o[0]=a00*c-a20*s;o[1]=a01*c-a21*s;o[2]=a02*c-a22*s;o[3]=a03*c-a23*s;
-                o[8]=a00*s+a20*c;o[9]=a01*s+a21*c;o[10]=a02*s+a22*c;o[11]=a03*s+a23*c; return o;
-            }
+            id:()=>new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]),
+            persp(o,fov,asp,n,f){const t=1/Math.tan(fov/2),nf=1/(n-f);o[0]=t/asp;o[1]=0;o[2]=0;o[3]=0;o[4]=0;o[5]=t;o[6]=0;o[7]=0;o[8]=0;o[9]=0;o[10]=(f+n)*nf;o[11]=-1;o[12]=0;o[13]=0;o[14]=2*f*n*nf;o[15]=0;return o;},
+            transl(o,a,[x,y,z]){if(a===o){o[12]=a[0]*x+a[4]*y+a[8]*z+a[12];o[13]=a[1]*x+a[5]*y+a[9]*z+a[13];o[14]=a[2]*x+a[6]*y+a[10]*z+a[14];o[15]=a[3]*x+a[7]*y+a[11]*z+a[15];}else{for(let i=0;i<12;i++)o[i]=a[i];o[12]=a[0]*x+a[4]*y+a[8]*z+a[12];o[13]=a[1]*x+a[5]*y+a[9]*z+a[13];o[14]=a[2]*x+a[6]*y+a[10]*z+a[14];o[15]=a[3]*x+a[7]*y+a[11]*z+a[15];}return o;},
+            rotX(o,a,r){const s=Math.sin(r),c=Math.cos(r),a10=a[4],a11=a[5],a12=a[6],a13=a[7],a20=a[8],a21=a[9],a22=a[10],a23=a[11];if(a!==o){o[0]=a[0];o[1]=a[1];o[2]=a[2];o[3]=a[3];o[12]=a[12];o[13]=a[13];o[14]=a[14];o[15]=a[15];}o[4]=a10*c+a20*s;o[5]=a11*c+a21*s;o[6]=a12*c+a22*s;o[7]=a13*c+a23*s;o[8]=a20*c-a10*s;o[9]=a21*c-a11*s;o[10]=a22*c-a12*s;o[11]=a23*c-a13*s;return o;},
+            rotY(o,a,r){const s=Math.sin(r),c=Math.cos(r),a00=a[0],a01=a[1],a02=a[2],a03=a[3],a20=a[8],a21=a[9],a22=a[10],a23=a[11];if(a!==o){o[4]=a[4];o[5]=a[5];o[6]=a[6];o[7]=a[7];o[12]=a[12];o[13]=a[13];o[14]=a[14];o[15]=a[15];}o[0]=a00*c-a20*s;o[1]=a01*c-a21*s;o[2]=a02*c-a22*s;o[3]=a03*c-a23*s;o[8]=a00*s+a20*c;o[9]=a01*s+a21*c;o[10]=a02*s+a22*c;o[11]=a03*s+a23*c;return o;}
         };
 
-        // ── Shaders ───────────────────────────────────────────────────────────
-        const VS = `
-            attribute vec3 aPos; attribute float aType;
-            uniform mat4 uMV; uniform mat4 uP; uniform float uPS;
-            varying float vDepth; varying float vType;
-            void main(void){
+        // ── Dot Shader ────────────────────────────────────────────────────────
+        const DOT_VS = `
+            attribute vec3 aPos;
+            uniform mat4 uMV, uP; uniform float uPS;
+            varying float vDepth;
+            void main(){
                 vec4 mv=uMV*vec4(aPos,1.0); gl_Position=uP*mv;
-                gl_PointSize=aType==0.0?uPS/-mv.z*4.0:1.0;
-                vDepth=(mv.z+5.0)/4.0; vType=aType;
+                gl_PointSize=uPS/-mv.z*4.0;
+                vDepth=(mv.z+5.0)/4.0;
             }`;
-        const FS = `
+        const DOT_FS = `
             precision mediump float;
-            varying float vDepth; varying float vType; uniform float uTime;
-            void main(void){
-                vec3 col=vec3(0.95,0.98,1.0); float a=smoothstep(1.2,-0.5,vDepth);
-                if(vType==0.0){
-                    vec2 c=gl_PointCoord-vec2(0.5); if(length(c)>0.5)discard;
-                    a*=smoothstep(0.5,0.2,length(c)); a*=0.6+0.4*sin(uTime*2.0+vDepth*10.0);
-                }else{ a*=0.15; col=vec3(0.6,0.7,0.8); }
-                if(a<0.01)discard; gl_FragColor=vec4(col,a);
+            varying float vDepth; uniform float uTime;
+            void main(){
+                vec2 c=gl_PointCoord-vec2(0.5); if(length(c)>0.5)discard;
+                float a=smoothstep(1.2,-0.5,vDepth)*smoothstep(0.5,0.2,length(c));
+                a*=0.65+0.35*sin(uTime*1.8+vDepth*8.0);
+                if(a<0.01)discard;
+                gl_FragColor=vec4(0.92,0.96,1.0,a);
             }`;
 
-        // ── Geometry ──────────────────────────────────────────────────────────
-        function buildGeom() {
-            const V=[],T=[],R=2;
-            const noise=(x,y,z)=>Math.sin(x*3)*Math.cos(y*4)+Math.sin(z*5)*Math.cos(x*2);
-            for(let la=0;la<=70;la++){
-                const t=la*Math.PI/70,st=Math.sin(t),ct=Math.cos(t);
-                for(let lo=0;lo<=140;lo++){
-                    const p=lo*2*Math.PI/140,x=Math.cos(p)*st,y=ct,z=Math.sin(p)*st;
-                    if(noise(x,y,z)>-0.2||Math.random()>0.8){V.push(R*x,R*y,R*z);T.push(0);}
-                }
+        // ── Arc Shader ────────────────────────────────────────────────────────
+        const ARC_VS = `
+            attribute vec3 aPos; attribute float aLocalT;
+            uniform mat4 uMV, uP;
+            uniform float uHeadT, uTailT;
+            varying float vFade; varying float vDepth;
+            void main(){
+                vec4 mv=uMV*vec4(aPos,1.0); gl_Position=uP*mv;
+                vDepth=(mv.z+5.0)/4.0;
+                float range=max(uHeadT-uTailT,0.001);
+                vFade=clamp((aLocalT-uTailT)/range,0.0,1.0);
+            }`;
+        const ARC_FS = `
+            precision mediump float;
+            varying float vFade; varying float vDepth;
+            uniform vec3 uColor;
+            void main(){
+                float depthFade=smoothstep(1.4,-0.3,vDepth);
+                float a=vFade*vFade*depthFade*0.95;
+                if(a<0.01)discard;
+                gl_FragColor=vec4(uColor,a);
+            }`;
+
+        // ── Geometry: Fibonacci Sphere ─────────────────────────────────────────
+        function fibSphere(n) {
+            const V=[], phi=Math.PI*(3-Math.sqrt(5));
+            for(let i=0;i<n;i++){
+                const y=1-(i/(n-1))*2, r=Math.sqrt(Math.max(0,1-y*y)), theta=phi*i;
+                V.push(R*r*Math.cos(theta), R*y, R*r*Math.sin(theta));
             }
-            const G=24;
-            for(let la=1;la<G;la++){
-                const t=la*Math.PI/G,st=Math.sin(t),ct=Math.cos(t);
-                for(let lo=0;lo<=60;lo++){const p=lo*2*Math.PI/60;V.push(R*Math.cos(p)*st,R*ct,R*Math.sin(p)*st);T.push(1);}
-            }
-            for(let lo=0;lo<G;lo++){
-                const p=lo*Math.PI/G;
-                for(let la=0;la<=60;la++){const t=la*2*Math.PI/60;V.push(R*Math.cos(p)*Math.sin(t),R*Math.cos(t),R*Math.sin(p)*Math.sin(t));T.push(1);}
-            }
-            return{verts:new Float32Array(V),types:new Float32Array(T)};
+            return new Float32Array(V);
         }
 
-        // ── Init ──────────────────────────────────────────────────────────────
-        function startGlobe() {
-            const canvas = document.getElementById('globe-webgl-canvas');
-            if (!canvas) return;
-            const gl = canvas.getContext('webgl',{alpha:true,antialias:true}) || canvas.getContext('experimental-webgl');
-            if (!gl) return;
+        // ── Geometry: Animated Arcs ────────────────────────────────────────────
+        function ll2unit(lat,lng){
+            const phi=(90-lat)*Math.PI/180, theta=(lng+180)*Math.PI/180;
+            return[-Math.sin(phi)*Math.cos(theta), Math.cos(phi), Math.sin(phi)*Math.sin(theta)];
+        }
+        function slerpPt(p1,p2,t,alt){
+            const dot=Math.max(-1,Math.min(1,p1[0]*p2[0]+p1[1]*p2[1]+p1[2]*p2[2]));
+            const om=Math.acos(dot), som=Math.sin(om);
+            let x,y,z;
+            if(som<0.001){x=(1-t)*p1[0]+t*p2[0];y=(1-t)*p1[1]+t*p2[1];z=(1-t)*p1[2]+t*p2[2];}
+            else{const a=Math.sin((1-t)*om)/som,b=Math.sin(t*om)/som;x=a*p1[0]+b*p2[0];y=a*p1[1]+b*p2[1];z=a*p1[2]+b*p2[2];}
+            const len=Math.sqrt(x*x+y*y+z*z)||1;
+            const r=alt*(R+R*0.45*4*t*(1-t)); // arc peaks 45% above surface at midpoint
+            return[x/len*r,y/len*r,z/len*r];
+        }
 
-            function mk(type, src) {
-                const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
-                if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.error(gl.getShaderInfoLog(s));return null;} return s;
-            }
-            const prog=gl.createProgram();
-            gl.attachShader(prog,mk(gl.VERTEX_SHADER,VS)); gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,FS)); gl.linkProgram(prog);
-            const I={
-                aPos:gl.getAttribLocation(prog,'aPos'),  aType:gl.getAttribLocation(prog,'aType'),
-                uMV:gl.getUniformLocation(prog,'uMV'),   uP:gl.getUniformLocation(prog,'uP'),
-                uPS:gl.getUniformLocation(prog,'uPS'),   uTime:gl.getUniformLocation(prog,'uTime'),
+        const ARC_DEFS = [
+            {from:[28.6139,77.209],   to:[3.139,101.686],  color:[0.02,0.78,0.93]}, // Delhi→KL (cyan)
+            {from:[-19.885,-43.951],  to:[-1.303,36.852],  color:[0.38,0.55,1.00]}, // São Paulo→Nairobi (blue)
+            {from:[51.507,-0.127],    to:[3.139,101.686],  color:[0.67,0.51,1.00]}, // London→Singapore (violet)
+            {from:[34.052,-118.24],   to:[48.856,2.352],   color:[0.02,0.78,0.93]}, // LA→Paris
+            {from:[-33.868,151.20],   to:[22.319,114.169], color:[0.38,0.55,1.00]}, // Sydney→HK
+            {from:[40.712,-74.006],   to:[51.507,-0.127],  color:[0.67,0.51,1.00]}, // NY→London
+            {from:[35.689,139.692],   to:[-33.868,151.20], color:[0.02,0.78,0.93]}, // Tokyo→Sydney
+            {from:[55.751,37.617],    to:[40.712,-74.006], color:[0.38,0.55,1.00]}, // Moscow→NY
+        ];
+        const ARC_SEG = 90; // segments per arc (smooth)
+        const TRAIL = 0.35; // tail length as fraction of arc
+
+        function buildArcs(){
+            const verts=[], localTs=[], meta=[];
+            ARC_DEFS.forEach((def,i)=>{
+                const p1=ll2unit(def.from[0],def.from[1]);
+                const p2=ll2unit(def.to[0],def.to[1]);
+                const startIdx=verts.length/3;
+                for(let j=0;j<=ARC_SEG;j++){
+                    const t=j/ARC_SEG;
+                    const pt=slerpPt(p1,p2,t,1);
+                    verts.push(...pt); localTs.push(t);
+                }
+                meta.push({startIdx, count:ARC_SEG+1, color:def.color, timeOffset:i*1.1});
+            });
+            return{verts:new Float32Array(verts), localTs:new Float32Array(localTs), meta};
+        }
+
+        // ── WebGL Init ────────────────────────────────────────────────────────
+        function mkProg(gl, vs, fs){
+            const mk=(t,src)=>{const s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(s));return s;};
+            const p=gl.createProgram();
+            gl.attachShader(p,mk(gl.VERTEX_SHADER,vs));
+            gl.attachShader(p,mk(gl.FRAGMENT_SHADER,fs));
+            gl.linkProgram(p); return p;
+        }
+
+        function startGlobe(){
+            const canvas=document.getElementById('globe-webgl-canvas');
+            if(!canvas)return;
+            const gl=canvas.getContext('webgl',{alpha:true,antialias:true})||canvas.getContext('experimental-webgl');
+            if(!gl)return;
+
+            // Programs
+            const dotProg=mkProg(gl,DOT_VS,DOT_FS);
+            const arcProg=mkProg(gl,ARC_VS,ARC_FS);
+
+            // Dot attributes/uniforms
+            const dI={
+                aPos:gl.getAttribLocation(dotProg,'aPos'),
+                uMV:gl.getUniformLocation(dotProg,'uMV'),  uP:gl.getUniformLocation(dotProg,'uP'),
+                uPS:gl.getUniformLocation(dotProg,'uPS'),  uTime:gl.getUniformLocation(dotProg,'uTime'),
             };
-            const geom=buildGeom();
-            const pb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,pb); gl.bufferData(gl.ARRAY_BUFFER,geom.verts,gl.STATIC_DRAW);
-            const tb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,tb); gl.bufferData(gl.ARRAY_BUFFER,geom.types,gl.STATIC_DRAW);
+            // Arc attributes/uniforms
+            const aI={
+                aPos:gl.getAttribLocation(arcProg,'aPos'), aLocalT:gl.getAttribLocation(arcProg,'aLocalT'),
+                uMV:gl.getUniformLocation(arcProg,'uMV'),  uP:gl.getUniformLocation(arcProg,'uP'),
+                uHeadT:gl.getUniformLocation(arcProg,'uHeadT'), uTailT:gl.getUniformLocation(arcProg,'uTailT'),
+                uColor:gl.getUniformLocation(arcProg,'uColor'),
+            };
 
-            let rotY=0, speed=0.001;
+            // Dot geometry
+            const dots=fibSphere(3200);
+            const dotBuf=gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER,dotBuf); gl.bufferData(gl.ARRAY_BUFFER,dots,gl.STATIC_DRAW);
+
+            // Arc geometry
+            const arcGeom=buildArcs();
+            const arcPosBuf=gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER,arcPosBuf); gl.bufferData(gl.ARRAY_BUFFER,arcGeom.verts,gl.STATIC_DRAW);
+            const arcTBuf=gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER,arcTBuf); gl.bufferData(gl.ARRAY_BUFFER,arcGeom.localTs,gl.STATIC_DRAW);
+
+            let rotY=0, speed=0.0008;
             canvas.addEventListener('mouseenter',()=>speed=0.0002);
-            canvas.addEventListener('mouseleave',()=>speed=0.001);
+            canvas.addEventListener('mouseleave',()=>speed=0.0008);
 
             function resize(){
                 const w=canvas.clientWidth,h=canvas.clientHeight;
                 if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}
             }
 
-            function draw(t) {
+            const ARC_PERIOD=5.0; // seconds for one full arc traversal
+
+            function draw(ts){
                 resize();
+                const t=ts*0.001;
                 gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
                 gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
                 gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
@@ -303,12 +456,38 @@
                 const P=m.id(); m.persp(P,Math.PI/4,canvas.clientWidth/canvas.clientHeight,0.1,100);
                 const MV=m.id(); m.transl(MV,MV,[0,0,-6.5]); m.rotX(MV,MV,0.3); m.rotY(MV,MV,rotY);
 
-                gl.useProgram(prog);
-                gl.bindBuffer(gl.ARRAY_BUFFER,pb); gl.vertexAttribPointer(I.aPos,3,gl.FLOAT,false,0,0); gl.enableVertexAttribArray(I.aPos);
-                gl.bindBuffer(gl.ARRAY_BUFFER,tb); gl.vertexAttribPointer(I.aType,1,gl.FLOAT,false,0,0); gl.enableVertexAttribArray(I.aType);
-                gl.uniformMatrix4fv(I.uP,false,P); gl.uniformMatrix4fv(I.uMV,false,MV);
-                gl.uniform1f(I.uPS,Math.max(2,canvas.clientHeight/300)); gl.uniform1f(I.uTime,t*0.001);
-                gl.drawArrays(gl.POINTS,0,geom.verts.length/3);
+                // ── Draw dots ──
+                gl.useProgram(dotProg);
+                gl.bindBuffer(gl.ARRAY_BUFFER,dotBuf);
+                gl.vertexAttribPointer(dI.aPos,3,gl.FLOAT,false,0,0); gl.enableVertexAttribArray(dI.aPos);
+                gl.uniformMatrix4fv(dI.uP,false,P); gl.uniformMatrix4fv(dI.uMV,false,MV);
+                gl.uniform1f(dI.uPS,Math.max(1.5,canvas.clientHeight/320)); gl.uniform1f(dI.uTime,t);
+                gl.drawArrays(gl.POINTS,0,dots.length/3);
+
+                // ── Draw arcs ──
+                gl.useProgram(arcProg);
+                gl.uniformMatrix4fv(aI.uP,false,P); gl.uniformMatrix4fv(aI.uMV,false,MV);
+
+                gl.bindBuffer(gl.ARRAY_BUFFER,arcPosBuf);
+                gl.vertexAttribPointer(aI.aPos,3,gl.FLOAT,false,0,0); gl.enableVertexAttribArray(aI.aPos);
+                gl.bindBuffer(gl.ARRAY_BUFFER,arcTBuf);
+                gl.vertexAttribPointer(aI.aLocalT,1,gl.FLOAT,false,0,0); gl.enableVertexAttribArray(aI.aLocalT);
+
+                arcGeom.meta.forEach(arc=>{
+                    const cycleT=((t+arc.timeOffset)%ARC_PERIOD)/ARC_PERIOD; // 0→1
+                    // head travels from 0 to 1 and then loops
+                    const headT=Math.min(cycleT*(1+TRAIL), 1.0);
+                    const tailT=Math.max(headT-TRAIL, 0.0);
+                    if(headT<=0)return;
+
+                    // Draw subrange of the arc strip
+                    const first=arc.startIdx+Math.floor(tailT*ARC_SEG);
+                    const count=Math.max(1,Math.ceil((headT-tailT)*ARC_SEG));
+
+                    gl.uniform1f(aI.uHeadT,headT); gl.uniform1f(aI.uTailT,tailT);
+                    gl.uniform3fv(aI.uColor,arc.color);
+                    gl.drawArrays(gl.LINE_STRIP,first,count);
+                });
 
                 rotY+=speed;
                 requestAnimationFrame(draw);
@@ -316,19 +495,16 @@
             requestAnimationFrame(draw);
         }
 
-        // Start when the section scrolls into view
-        const target = document.getElementById('globe-section');
-        if (target && 'IntersectionObserver' in window) {
-            let started = false;
-            new IntersectionObserver((entries, obs) => {
-                if (entries[0].isIntersecting && !started) {
-                    started = true; startGlobe(); obs.disconnect();
-                }
-            }, { threshold: 0.1 }).observe(target);
-        } else {
-            startGlobe(); // fallback: start immediately
-        }
+        // Lazy-start on scroll into view
+        const target=document.getElementById('globe-section');
+        if(target&&'IntersectionObserver' in window){
+            let started=false;
+            new IntersectionObserver((entries,obs)=>{
+                if(entries[0].isIntersecting&&!started){started=true;startGlobe();obs.disconnect();}
+            },{threshold:0.1}).observe(target);
+        } else { startGlobe(); }
     })();
     </script>
+
 </body>
 </html>
