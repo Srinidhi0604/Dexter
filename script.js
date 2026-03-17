@@ -189,4 +189,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         container.appendChild(fragment);
     })();
+
+    // --- 3D Image Carousel ---
+    (function initCarousel() {
+        const carousel = document.getElementById('image-carousel');
+        const prevBtn = document.getElementById('carousel-prev');
+        const nextBtn = document.getElementById('carousel-next');
+        
+        if (!carousel || !prevBtn || !nextBtn) return;
+
+        let rotationAngle = 0;
+        let autoRotateInterval;
+
+        const updateCarousel = () => {
+            carousel.style.transform = `rotateY(${rotationAngle}deg)`;
+        };
+
+        const startAutoRotate = () => {
+            autoRotateInterval = setInterval(() => {
+                rotationAngle -= 45; // 8 items = 360 / 8 = 45deg steps
+                updateCarousel();
+            }, 3000);
+        };
+
+        const resetAutoRotate = () => {
+            clearInterval(autoRotateInterval);
+            startAutoRotate();
+        };
+
+        prevBtn.addEventListener('click', () => {
+            rotationAngle += 45;
+            updateCarousel();
+            resetAutoRotate();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            rotationAngle -= 45;
+            updateCarousel();
+            resetAutoRotate();
+        });
+
+        // Pause on hover
+        carousel.addEventListener('mouseenter', () => clearInterval(autoRotateInterval));
+        carousel.addEventListener('mouseleave', startAutoRotate);
+
+        startAutoRotate();
+    })();
 });
