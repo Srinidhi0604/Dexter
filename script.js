@@ -235,4 +235,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         startAutoRotate();
     })();
+
+    // --- Typewriter Effect ---
+    function typeWriter(element, speed = 50) {
+        const text = element.textContent;
+        element.textContent = '';
+        element.classList.add('typing');
+        let i = 0;
+
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                element.classList.remove('typing');
+            }
+        }
+        type();
+    }
+
+    const typewriterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const heading = document.getElementById('globe-heading');
+                const description = document.getElementById('globe-description');
+                
+                if (heading) typeWriter(heading, 70);
+                if (description) setTimeout(() => typeWriter(description, 40), 1000);
+                
+                typewriterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const globeSection = document.getElementById('globe-section');
+    if (globeSection) typewriterObserver.observe(globeSection);
 });

@@ -896,6 +896,19 @@ main {
     display: block;
 }
 
+/* Typewriter Cursor Effect */
+.typing::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+    margin-left: 2px;
+    color: var(--mars-orange);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 /* MARS GLOBE (Bottom Left) */
 .mars-globe-container {
     position: absolute;
