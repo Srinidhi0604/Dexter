@@ -1292,10 +1292,10 @@ main {
 
 /* 3D Social Media Cube Styles */
 .footer-cube-container {
-    width: 60px;
-    height: 60px;
-    perspective: 400px;
-    margin: 0 4rem;
+    width: 120px;
+    height: 120px;
+    perspective: 600px;
+    margin: 0;
 }
 
 .footer-cube {
@@ -1303,7 +1303,7 @@ main {
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    animation: footerCubeSpin 15s linear infinite;
+    animation: footerCubeSpin 20s linear infinite;
     cursor: grab;
 }
 
@@ -1313,15 +1313,15 @@ main {
 
 .cube-face {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    background: rgba(20, 20, 20, 0.8);
-    border: 1px solid rgba(209, 70, 30, 0.4);
+    width: 120px;
+    height: 120px;
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(209, 70, 30, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
 }
 
 .cube-face a {
@@ -1336,27 +1336,27 @@ main {
 }
 
 .cube-face:hover {
-    background: rgba(209, 70, 30, 0.2);
+    background: rgba(209, 70, 30, 0.3);
     border-color: var(--mars-orange);
-    box-shadow: 0 0 15px var(--mars-orange);
+    box-shadow: 0 0 25px var(--mars-orange);
 }
 
 .cube-face svg {
-    width: 28px;
-    height: 28px;
+    width: 48px;
+    height: 48px;
     transition: transform 0.3s ease;
 }
 
 .cube-face:hover svg {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
-.front  { transform: rotateY(0deg) translateZ(30px); }
-.back   { transform: rotateY(180deg) translateZ(30px); }
-.right  { transform: rotateY(90deg) translateZ(30px); }
-.left   { transform: rotateY(-90deg) translateZ(30px); }
-.top    { transform: rotateX(90deg) translateZ(30px); }
-.bottom { transform: rotateX(-90deg) translateZ(30px); }
+.front  { transform: rotateY(0deg) translateZ(60px); }
+.back   { transform: rotateY(180deg) translateZ(60px); }
+.right  { transform: rotateY(90deg) translateZ(60px); }
+.left   { transform: rotateY(-90deg) translateZ(60px); }
+.top    { transform: rotateX(90deg) translateZ(60px); }
+.bottom { transform: rotateX(-90deg) translateZ(60px); }
 
 @keyframes footerCubeSpin {
     from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
