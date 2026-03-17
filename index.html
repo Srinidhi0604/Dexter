@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Tech Showcase</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="loading-screen" id="loading">
+        <div class="spinner"></div>
+    </div>
+    
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- Top Navigation Container -->
+    <header class="top-nav">
+        <div class="nav-brand">NOVA</div>
+        
+        <div class="nav-center-pills">
+            <a href="#hero" class="pill-link">HOME</a>
+            <a href="#features" class="pill-link">CAPABILITIES</a>
+            <a href="#tech" class="pill-link">TECHNOLOGY</a>
+            <a href="#roadmap" class="pill-link">ROADMAP</a>
+        </div>
+        
+        <div class="nav-hashtag">#WebflowChallenge</div>
+    </header>
+
+    <!-- Fixed Area for Globe and Right Card -->
+    <div class="hero-fixed-assets">
+        <div class="mars-globe-container">
+            <!-- Our existing 3D globe structure, restyled for orange/mars -->
+            <div class="globe mars-globe" id="globe">
+                <div class="globe-core mars-core"></div>
+            </div>
+        </div>
+        
+        <!-- Bottom Right Card Interface (NOVA // Mind //) -->
+        <div class="interface-card">
+            <div class="glowing-orbs">
+                <div class="orb orb-left"></div>
+                <div class="orb orb-right"></div>
+            </div>
+            <div class="card-footer">
+                <span>// NOVA //</span>
+                <span>// Mind //</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrollable Content -->
+    <main>
+        <section class="section hero-mars" id="hero">
+            <div class="content-wrapper centered mars-text-wrapper">
+                <h1 class="massive-text">MARS</h1>
+                <p class="mars-subtext">A MISSION ON MARS DEMANDS ADAPTABILITY, RESILIENCE, AND SMART SYSTEMS.<br>THE FUTURE OF THE WEB IS NO DIFFERENT: MOTION THAT GUIDES, SYSTEMS THAT<br>RESPOND, INTERACTIONS THAT ADAPT.</p>
+                
+                <div class="scroll-down-indicator">SCROLL DOWN</div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: FEATURES / CAPABILITIES (Background Boxes) -->
+        <section class="section features" id="features">
+            <!-- Background grid -->
+            <div id="boxes-container"></div>
+            <div id="boxes-vignette"></div>
+
+            <!-- Content overlay -->
+            <div class="content-wrapper features-overlay">
+                <div class="section-header">
+                    <h2 class="animate-text-glitch" data-text="Capabilities">Capabilities</h2>
+                    <p class="section-subtext">Powerful tools designed for adaptability and resilience.</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="card-front"><h3>Instant Liquidity</h3></div>
+                        <div class="card-expanded"><p>Experience unparalleled speed and capital efficiency without intermediaries slowing down your settlement.</p></div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-front"><h3>Cross-Chain Sync</h3></div>
+                        <div class="card-expanded"><p>Seamlessly transition assets between varying network protocols with guaranteed cryptographic state anchors.</p></div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="card-front"><h3>AI Risk Analysis</h3></div>
+                        <div class="card-expanded"><p>Real-time neural monitoring detects anomalies and mitigates vectors before execution.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TECHNOLOGY SHOWCASE (3D Media Cube) -->
+        <section class="section tech-showcase" id="tech">
+            <div class="content-wrapper split-layout">
+                <div class="text-content">
+                    <h2 class="animate-text-reveal">Core Engine</h2>
+                    <p class="section-subtext fade-up-text">Hover to examine the multi-layered architecture powering the ecosystem.</p>
+                </div>
+                
+                <!-- 3D Media Cube -->
+                <div class="cube-showcase-container">
+                    <div class="media-cube" id="media-cube">
+                        <div class="cube-face cube-front">
+                            <div class="face-content">AI</div>
+                        </div>
+                        <div class="cube-face cube-back">
+                            <div class="face-content">CHAIN</div>
+                        </div>
+                        <div class="cube-face cube-right">
+                            <div class="face-content">SEC</div>
+                        </div>
+                        <div class="cube-face cube-left">
+                            <div class="face-content">DATA</div>
+                        </div>
+                        <div class="cube-face cube-top">
+                            <div class="face-content">CORE</div>
+                        </div>
+                        <div class="cube-face cube-bottom">
+                            <div class="face-content">SYNC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- SECTION: GLOBE -->
+        <section class="section globe-section" id="globe-section">
+            <canvas id="globe-webgl-canvas"></canvas>
+        </section>
+
+        <!-- SECTION 6: TRUST / SECURITY (3D Typography) -->
+        <section class="section trust-section" id="trust">
+            <div class="content-wrapper centered">
+                <div class="trust-typography">
+                    <span class="word-3d">TRUST</span>
+                    <span class="word-3d">SECURE</span>
+                    <span class="word-3d">VERIFIED</span>
+                </div>
+                <p class="section-subtext fade-up-text">100% audited smart contracts with military-grade asset anchoring.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 7: INTERACTIVE EXPERIENCE (Existing Demo Card) -->
+        <section class="section interactive-card-demo" id="interactive-demo">
+            <div class="content-wrapper centered">
+                <h2>Experience 3D Depth</h2>
+                <div class="card-container">
+                    <div class="card-body">
+                        <h3 class="card-item" data-translatez="50">Make things float in air</h3>
+                        <p class="card-item" data-translatez="60">Hover over this card to unleash the power of CSS perspective</p>
+                        <div class="card-item image-container" data-translatez="100">
+                            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="thumbnail">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://twitter.com/mannupaaji" target="_blank" class="card-item" data-translatez="20">Try now &rarr;</a>
+                            <button class="card-item btn-signup" data-translatez="20">Sign up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 8: FINAL CTA -->
+        <section class="section final-cta" id="cta">
+            <div class="content-wrapper centered">
+                <h2 class="animate-text-glitch" data-text="Step Into the Future of Finance">Step Into the Future of Finance</h2>
+                <a href="#" class="btn-glow-large">GET STARTED</a>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="logo">FutureTech</div>
+                <div class="footer-links">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Discord</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Future Tech Showcase. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+
+    <!-- Globe WebGL Component -->
+    <script>
+    (function () {
+        // ── mat4 helpers ──────────────────────────────────────────────────────
+        const m = {
+            id: () => new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]),
+            persp(o, fov, asp, n, f) {
+                const t = 1/Math.tan(fov/2), nf = 1/(n-f);
+                o[0]=t/asp;o[1]=0;o[2]=0;o[3]=0; o[4]=0;o[5]=t;o[6]=0;o[7]=0;
+                o[8]=0;o[9]=0;o[10]=(f+n)*nf;o[11]=-1; o[12]=0;o[13]=0;o[14]=2*f*n*nf;o[15]=0; return o;
+            },
+            transl(o, a, [x,y,z]) {
+                if(a===o){o[12]=a[0]*x+a[4]*y+a[8]*z+a[12];o[13]=a[1]*x+a[5]*y+a[9]*z+a[13];o[14]=a[2]*x+a[6]*y+a[10]*z+a[14];o[15]=a[3]*x+a[7]*y+a[11]*z+a[15];}
+                else{for(let i=0;i<12;i++)o[i]=a[i];o[12]=a[0]*x+a[4]*y+a[8]*z+a[12];o[13]=a[1]*x+a[5]*y+a[9]*z+a[13];o[14]=a[2]*x+a[6]*y+a[10]*z+a[14];o[15]=a[3]*x+a[7]*y+a[11]*z+a[15];}
+                return o;
+            },
+            rotX(o, a, r) {
+                const s=Math.sin(r),c=Math.cos(r),[a10,a11,a12,a13,a20,a21,a22,a23]=[a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]];
+                if(a!==o){o[0]=a[0];o[1]=a[1];o[2]=a[2];o[3]=a[3];o[12]=a[12];o[13]=a[13];o[14]=a[14];o[15]=a[15];}
+                o[4]=a10*c+a20*s;o[5]=a11*c+a21*s;o[6]=a12*c+a22*s;o[7]=a13*c+a23*s;
+                o[8]=a20*c-a10*s;o[9]=a21*c-a11*s;o[10]=a22*c-a12*s;o[11]=a23*c-a13*s; return o;
+            },
+            rotY(o, a, r) {
+                const s=Math.sin(r),c=Math.cos(r),[a00,a01,a02,a03,a20,a21,a22,a23]=[a[0],a[1],a[2],a[3],a[8],a[9],a[10],a[11]];
+                if(a!==o){o[4]=a[4];o[5]=a[5];o[6]=a[6];o[7]=a[7];o[12]=a[12];o[13]=a[13];o[14]=a[14];o[15]=a[15];}
+                o[0]=a00*c-a20*s;o[1]=a01*c-a21*s;o[2]=a02*c-a22*s;o[3]=a03*c-a23*s;
+                o[8]=a00*s+a20*c;o[9]=a01*s+a21*c;o[10]=a02*s+a22*c;o[11]=a03*s+a23*c; return o;
+            }
+        };
+
+        // ── Shaders ───────────────────────────────────────────────────────────
+        const VS = `
+            attribute vec3 aPos; attribute float aType;
+            uniform mat4 uMV; uniform mat4 uP; uniform float uPS;
+            varying float vDepth; varying float vType;
+            void main(void){
+                vec4 mv=uMV*vec4(aPos,1.0); gl_Position=uP*mv;
+                gl_PointSize=aType==0.0?uPS/-mv.z*4.0:1.0;
+                vDepth=(mv.z+5.0)/4.0; vType=aType;
+            }`;
+        const FS = `
+            precision mediump float;
+            varying float vDepth; varying float vType; uniform float uTime;
+            void main(void){
+                vec3 col=vec3(0.95,0.98,1.0); float a=smoothstep(1.2,-0.5,vDepth);
+                if(vType==0.0){
+                    vec2 c=gl_PointCoord-vec2(0.5); if(length(c)>0.5)discard;
+                    a*=smoothstep(0.5,0.2,length(c)); a*=0.6+0.4*sin(uTime*2.0+vDepth*10.0);
+                }else{ a*=0.15; col=vec3(0.6,0.7,0.8); }
+                if(a<0.01)discard; gl_FragColor=vec4(col,a);
+            }`;
+
+        // ── Geometry ──────────────────────────────────────────────────────────
+        function buildGeom() {
+            const V=[],T=[],R=2;
+            const noise=(x,y,z)=>Math.sin(x*3)*Math.cos(y*4)+Math.sin(z*5)*Math.cos(x*2);
+            for(let la=0;la<=70;la++){
+                const t=la*Math.PI/70,st=Math.sin(t),ct=Math.cos(t);
+                for(let lo=0;lo<=140;lo++){
+                    const p=lo*2*Math.PI/140,x=Math.cos(p)*st,y=ct,z=Math.sin(p)*st;
+                    if(noise(x,y,z)>-0.2||Math.random()>0.8){V.push(R*x,R*y,R*z);T.push(0);}
+                }
+            }
+            const G=24;
+            for(let la=1;la<G;la++){
+                const t=la*Math.PI/G,st=Math.sin(t),ct=Math.cos(t);
+                for(let lo=0;lo<=60;lo++){const p=lo*2*Math.PI/60;V.push(R*Math.cos(p)*st,R*ct,R*Math.sin(p)*st);T.push(1);}
+            }
+            for(let lo=0;lo<G;lo++){
+                const p=lo*Math.PI/G;
+                for(let la=0;la<=60;la++){const t=la*2*Math.PI/60;V.push(R*Math.cos(p)*Math.sin(t),R*Math.cos(t),R*Math.sin(p)*Math.sin(t));T.push(1);}
+            }
+            return{verts:new Float32Array(V),types:new Float32Array(T)};
+        }
+
+        // ── Init ──────────────────────────────────────────────────────────────
+        function startGlobe() {
+            const canvas = document.getElementById('globe-webgl-canvas');
+            if (!canvas) return;
+            const gl = canvas.getContext('webgl',{alpha:true,antialias:true}) || canvas.getContext('experimental-webgl');
+            if (!gl) return;
+
+            function mk(type, src) {
+                const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+                if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.error(gl.getShaderInfoLog(s));return null;} return s;
+            }
+            const prog=gl.createProgram();
+            gl.attachShader(prog,mk(gl.VERTEX_SHADER,VS)); gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,FS)); gl.linkProgram(prog);
+            const I={
+                aPos:gl.getAttribLocation(prog,'aPos'),  aType:gl.getAttribLocation(prog,'aType'),
+                uMV:gl.getUniformLocation(prog,'uMV'),   uP:gl.getUniformLocation(prog,'uP'),
+                uPS:gl.getUniformLocation(prog,'uPS'),   uTime:gl.getUniformLocation(prog,'uTime'),
+            };
+            const geom=buildGeom();
+            const pb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,pb); gl.bufferData(gl.ARRAY_BUFFER,geom.verts,gl.STATIC_DRAW);
+            const tb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,tb); gl.bufferData(gl.ARRAY_BUFFER,geom.types,gl.STATIC_DRAW);
+
+            let rotY=0, speed=0.001;
+            canvas.addEventListener('mouseenter',()=>speed=0.0002);
+            canvas.addEventListener('mouseleave',()=>speed=0.001);
+
+            function resize(){
+                const w=canvas.clientWidth,h=canvas.clientHeight;
+                if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}
+            }
+
+            function draw(t) {
+                resize();
+                gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+                gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
+                gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA,gl.ONE);
+
+                const P=m.id(); m.persp(P,Math.PI/4,canvas.clientWidth/canvas.clientHeight,0.1,100);
+                const MV=m.id(); m.transl(MV,MV,[0,0,-6.5]); m.rotX(MV,MV,0.3); m.rotY(MV,MV,rotY);
+
+                gl.useProgram(prog);
+                gl.bindBuffer(gl.ARRAY_BUFFER,pb); gl.vertexAttribPointer(I.aPos,3,gl.FLOAT,false,0,0); gl.enableVertexAttribArray(I.aPos);
+                gl.bindBuffer(gl.ARRAY_BUFFER,tb); gl.vertexAttribPointer(I.aType,1,gl.FLOAT,false,0,0); gl.enableVertexAttribArray(I.aType);
+                gl.uniformMatrix4fv(I.uP,false,P); gl.uniformMatrix4fv(I.uMV,false,MV);
+                gl.uniform1f(I.uPS,Math.max(2,canvas.clientHeight/300)); gl.uniform1f(I.uTime,t*0.001);
+                gl.drawArrays(gl.POINTS,0,geom.verts.length/3);
+
+                rotY+=speed;
+                requestAnimationFrame(draw);
+            }
+            requestAnimationFrame(draw);
+        }
+
+        // Start when the section scrolls into view
+        const target = document.getElementById('globe-section');
+        if (target && 'IntersectionObserver' in window) {
+            let started = false;
+            new IntersectionObserver((entries, obs) => {
+                if (entries[0].isIntersecting && !started) {
+                    started = true; startGlobe(); obs.disconnect();
+                }
+            }, { threshold: 0.1 }).observe(target);
+        } else {
+            startGlobe(); // fallback: start immediately
+        }
+    })();
+    </script>
+</body>
+</html>

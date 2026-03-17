@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Globe Component</title>
+    <style>
+        /* Base Reset & Styling */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* WebGL Canvas */
+        #globe-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* Move canvas slightly to the right to match the image's framing */
+            transform: translateX(15%);
+        }
+
+        /* UI Overlay */
+        .overlay {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            pointer-events: none;
+            /* Let clicks pass through to canvas if interactive */
+        }
+
+        .content {
+            padding-left: 8vw;
+            max-width: 600px;
+            pointer-events: auto;
+            /* Re-enable clicks for UI */
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: #a1a1aa;
+            font-size: clamp(1rem, 1.2vw, 1.1rem);
+            line-height: 1.6;
+            margin: 0 0 2rem 0;
+            max-width: 380px;
+        }
+
+        /* Buttons matching the design */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #e4e4e7;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #3f3f46;
+        }
+
+        .btn-secondary:hover {
+            border-color: #71717a;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Fade overlay for left border transition */
+        .gradient-fade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(to right, #050505 40%, transparent 100%);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gradient-fade"></div>
+    <canvas id="globe-canvas"></canvas>
+
+    <div class="overlay">
+        <div class="content">
+            <h1>3D Globe<br>Component</h1>
+            <p>The only component you'll need for bringing depth and motion to your website.</p>
+            <div class="button-group">
+                <button class="btn btn-primary">Remix Project</button>
+                <button class="btn btn-secondary">Original</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Minimal Matrix Math Library (to avoid external dependencies) ---
+        const mat4 = {
+            create: function () {
+                return new Float32Array([
+                    1, 0, 0, 0,
+                    0, 1, 0, 0,
+                    0, 0, 1, 0,
+                    0, 0, 0, 1
+                ]);
+            },
+            perspective: function (out, fovy, aspect, near, far) {
+                let f = 1.0 / Math.tan(fovy / 2), nf = 1 / (near - far);
+                out[0] = f / aspect; out[1] = 0; out[2] = 0; out[3] = 0;
+                out[4] = 0; out[5] = f; out[6] = 0; out[7] = 0;
+                out[8] = 0; out[9] = 0; out[10] = (far + near) * nf; out[11] = -1;
+                out[12] = 0; out[13] = 0; out[14] = (2 * far * near) * nf; out[15] = 0;
+                return out;
+            },
+            translate: function (out, a, v) {
+                let x = v[0], y = v[1], z = v[2];
+                if (a === out) {
+                    out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
+                    out[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
+                    out[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
+                    out[15] = a[3] * x + a[7] * y + a[11] * z + a[15];
+                } else {
+                    out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3];
+                    out[4] = a[4]; out[5] = a[5]; out[6] = a[6]; out[7] = a[7];
+                    out[8] = a[8]; out[9] = a[9]; out[10] = a[10]; out[11] = a[11];
+                    out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
+                    out[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
+                    out[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
+                    out[15] = a[3] * x + a[7] * y + a[11] * z + a[15];
+                }
+                return out;
+            },
+            rotateX: function (out, a, rad) {
+                let s = Math.sin(rad), c = Math.cos(rad), a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7], a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+                if (a !== out) { out[0] = a[0]; out[1] = a[1]; out[2] = a[2]; out[3] = a[3]; out[12] = a[12]; out[13] = a[13]; out[14] = a[14]; out[15] = a[15]; }
+                out[4] = a10 * c + a20 * s; out[5] = a11 * c + a21 * s; out[6] = a12 * c + a22 * s; out[7] = a13 * c + a23 * s;
+                out[8] = a20 * c - a10 * s; out[9] = a21 * c - a11 * s; out[10] = a22 * c - a12 * s; out[11] = a23 * c - a13 * s;
+                return out;
+            },
+            rotateY: function (out, a, rad) {
+                let s = Math.sin(rad), c = Math.cos(rad), a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3], a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+                if (a !== out) { out[4] = a[4]; out[5] = a[5]; out[6] = a[6]; out[7] = a[7]; out[12] = a[12]; out[13] = a[13]; out[14] = a[14]; out[15] = a[15]; }
+                out[0] = a00 * c - a20 * s; out[1] = a01 * c - a21 * s; out[2] = a02 * c - a22 * s; out[3] = a03 * c - a23 * s;
+                out[8] = a00 * s + a20 * c; out[9] = a01 * s + a21 * c; out[10] = a02 * s + a22 * c; out[11] = a03 * s + a23 * c;
+                return out;
+            }
+        };
+
+        // --- WebGL Setup ---
+        const canvas = document.getElementById('globe-canvas');
+        const gl = canvas.getContext('webgl', { alpha: true, antialias: true }) || canvas.getContext('experimental-webgl');
+
+        if (!gl) {
+            console.error('WebGL is not supported by your browser.');
+        }
+
+        // Shaders
+        // Vertex Shader: Projects 3D points to 2D screen, passes Z value for depth fading
+        const vsSource = `
+            attribute vec3 aVertexPosition;
+            attribute float aType; // 0 for point, 1 for line
+
+            uniform mat4 uModelViewMatrix;
+            uniform mat4 uProjectionMatrix;
+            uniform float uPointSize;
+
+            varying float vDepth;
+            varying float vType;
+
+            void main(void) {
+                vec4 modelViewPosition = uModelViewMatrix * vec4(aVertexPosition, 1.0);
+                gl_Position = uProjectionMatrix * modelViewPosition;
+                
+                // Set point size, shrink slightly based on depth
+                gl_PointSize = aType == 0.0 ? uPointSize / -modelViewPosition.z * 4.0 : 1.0;
+                
+                // Pass z depth and type to fragment shader
+                // Normalize depth based on sphere radius
+                vDepth = (modelViewPosition.z + 5.0) / 4.0; 
+                vType = aType;
+            }
+        `;
+
+        // Fragment Shader: Renders dots as circles and creates depth fading
+        const fsSource = `
+            precision mediump float;
+            
+            varying float vDepth;
+            varying float vType;
+            
+            uniform float uTime;
+
+            void main(void) {
+                // Base glowing white/cyan color
+                vec3 color = vec3(0.95, 0.98, 1.0);
+                
+                // Alpha fades out as depth moves backward
+                float alpha = smoothstep(1.2, -0.5, vDepth);
+                
+                if (vType == 0.0) {
+                    // For points, create a soft circle
+                    vec2 coord = gl_PointCoord - vec2(0.5);
+                    float dist = length(coord);
+                    if (dist > 0.5) discard;
+                    
+                    // Soft edge
+                    alpha *= smoothstep(0.5, 0.2, dist);
+                    
+                    // Add subtle pulse based on time
+                    alpha *= 0.6 + 0.4 * sin(uTime * 2.0 + vDepth * 10.0);
+                } else {
+                    // Lines are more transparent
+                    alpha *= 0.15;
+                    color = vec3(0.6, 0.7, 0.8);
+                }
+
+                // Discard fully transparent pixels
+                if (alpha < 0.01) discard;
+
+                gl_FragColor = vec4(color, alpha);
+            }
+        `;
+
+        function initShaderProgram(gl, vsSource, fsSource) {
+            const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+            const shaderProgram = gl.createProgram();
+            gl.attachShader(shaderProgram, vertexShader);
+            gl.attachShader(shaderProgram, fragmentShader);
+            gl.linkProgram(shaderProgram);
+
+            if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+                console.error('Shader linking failed: ' + gl.getProgramInfoLog(shaderProgram));
+                return null;
+            }
+            return shaderProgram;
+        }
+
+        function loadShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('Shader compilation error: ' + gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+
+        const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
+
+        const programInfo = {
+            program: shaderProgram,
+            attribLocations: {
+                vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+                type: gl.getAttribLocation(shaderProgram, 'aType'),
+            },
+            uniformLocations: {
+                projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
+                modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+                pointSize: gl.getUniformLocation(shaderProgram, 'uPointSize'),
+                time: gl.getUniformLocation(shaderProgram, 'uTime'),
+            },
+        };
+
+        // --- Geometry Generation (Dots & Grid) ---
+        function createGlobeGeometry() {
+            const vertices = [];
+            const types = []; // 0 for point, 1 for line
+            const radius = 2.0;
+
+            // 1. Generate Dot-Matrix Landmass (Procedural approximation)
+            const numLatitudes = 70;
+            const numLongitudes = 140;
+
+            // Simple noise function helper for pseudo-landmasses
+            function simpleNoise(x, y, z) {
+                return Math.sin(x * 3.0) * Math.cos(y * 4.0) + Math.sin(z * 5.0) * Math.cos(x * 2.0);
+            }
+
+            for (let lat = 0; lat <= numLatitudes; lat++) {
+                const theta = lat * Math.PI / numLatitudes;
+                const sinTheta = Math.sin(theta);
+                const cosTheta = Math.cos(theta);
+
+                for (let lon = 0; lon <= numLongitudes; lon++) {
+                    const phi = lon * 2 * Math.PI / numLongitudes;
+                    const sinPhi = Math.sin(phi);
+                    const cosPhi = Math.cos(phi);
+
+                    const x = cosPhi * sinTheta;
+                    const y = cosTheta;
+                    const z = sinPhi * sinTheta;
+
+                    // Procedural filtering to create "continents"
+                    const n = simpleNoise(x, y, z);
+
+                    // Create more dots on 'land', fewer on 'water'
+                    if (n > -0.2 || Math.random() > 0.8) {
+                        vertices.push(radius * x, radius * y, radius * z);
+                        types.push(0); // It's a point
+                    }
+                }
+            }
+
+            // 2. Generate Wireframe Grid Lines
+            const gridLines = 24; // Lines of longitude/latitude
+
+            // Latitude lines
+            for (let lat = 1; lat < gridLines; lat++) {
+                const theta = lat * Math.PI / gridLines;
+                const sinTheta = Math.sin(theta);
+                const cosTheta = Math.cos(theta);
+
+                for (let lon = 0; lon <= 60; lon++) {
+                    const phi = lon * 2 * Math.PI / 60;
+                    vertices.push(
+                        radius * Math.cos(phi) * sinTheta,
+                        radius * cosTheta,
+                        radius * Math.sin(phi) * sinTheta
+                    );
+                    types.push(1); // Type line
+                }
+            }
+
+            // Longitude lines
+            for (let lon = 0; lon < gridLines; lon++) {
+                const phi = lon * Math.PI / gridLines; // Half sphere rotated
+                const sinPhi = Math.sin(phi);
+                const cosPhi = Math.cos(phi);
+
+                for (let lat = 0; lat <= 60; lat++) {
+                    const theta = lat * 2 * Math.PI / 60;
+                    vertices.push(
+                        radius * cosPhi * Math.sin(theta),
+                        radius * Math.cos(theta),
+                        radius * sinPhi * Math.sin(theta)
+                    );
+                    types.push(1); // Type line
+                }
+            }
+
+            return {
+                vertexPoints: new Float32Array(vertices),
+                vertexTypes: new Float32Array(types)
+            };
+        }
+
+        const geom = createGlobeGeometry();
+
+        // Buffers
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, geom.vertexPoints, gl.STATIC_DRAW);
+
+        const typeBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, typeBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, geom.vertexTypes, gl.STATIC_DRAW);
+
+        // --- Rendering Loop ---
+        let rotationY = 0;
+        let rotationX = 0.3; // Tilt the Earth slightly to show Northern Hemisphere
+
+        function resizeCanvasToDisplaySize(canvas) {
+            const displayWidth = canvas.clientWidth;
+            const displayHeight = canvas.clientHeight;
+
+            if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+                canvas.width = displayWidth;
+                canvas.height = displayHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function drawScene(time) {
+            resizeCanvasToDisplaySize(gl.canvas);
+
+            gl.clearColor(0.0, 0.0, 0.0, 0.0); // Transparent black to let CSS background show
+            gl.clearDepth(1.0);
+            gl.enable(gl.DEPTH_TEST);
+            gl.depthFunc(gl.LEQUAL);
+
+            // Enable blending for the glowing effect
+            gl.enable(gl.BLEND);
+            gl.blendFunc(gl.SRC_ALPHA, gl.ONE); // Additive blending for glow
+
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+            const fieldOfView = 45 * Math.PI / 180;
+            const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+            const zNear = 0.1;
+            const zFar = 100.0;
+            const projectionMatrix = mat4.create();
+            mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
+
+            const modelViewMatrix = mat4.create();
+
+            // Position camera (pull back to see the globe)
+            mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.0, -6.5]);
+
+            // Apply rotations
+            mat4.rotateX(modelViewMatrix, modelViewMatrix, rotationX);
+            mat4.rotateY(modelViewMatrix, modelViewMatrix, rotationY);
+
+            // Bind Attributes
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, typeBuffer);
+            gl.vertexAttribPointer(programInfo.attribLocations.type, 1, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(programInfo.attribLocations.type);
+
+            // Use Shader
+            gl.useProgram(programInfo.program);
+
+            // Set Uniforms
+            gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, projectionMatrix);
+            gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
+
+            // Dynamic point size scaling based on screen height
+            gl.uniform1f(programInfo.uniformLocations.pointSize, Math.max(2.0, gl.canvas.clientHeight / 300.0));
+            gl.uniform1f(programInfo.uniformLocations.time, time * 0.001);
+
+            // Draw Geometry
+            // Note: GL_POINTS and GL_LINE_STRIP are interleaved in our buffer setup conceptually, 
+            // but WebGL handles it by type via the shader logic.
+            // Actually, to draw them cleanly, we draw all points, then lines.
+            // Our buffer is sequential so we could split them, but since we rely on gl.POINTS 
+            // we will just draw them as POINTS, and the "lines" will just be denser points unless we use GL_LINES.
+            // Given constraints and single buffer simplicity, drawing all as points works perfectly for the "dot matrix" wireframe look.
+            gl.drawArrays(gl.POINTS, 0, geom.vertexPoints.length / 3);
+
+            // Update rotation for continuous spinning
+            rotationY += 0.001;
+
+            requestAnimationFrame(drawScene);
+        }
+
+        // --- Interaction ---
+        // Slow down spinning on mouse over
+        let targetSpeed = 0.001;
+
+        canvas.addEventListener('mousemove', () => {
+            targetSpeed = 0.0002;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            targetSpeed = 0.001;
+        });
+
+        // Loop override for smooth speed transition
+        requestAnimationFrame(function loop(time) {
+            rotationY += targetSpeed;
+            // Draw is called recursively
+            drawScene(time);
+        });
+
+    </script>
+</body>
+
+</html>
