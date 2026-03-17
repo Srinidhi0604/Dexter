@@ -1284,16 +1284,83 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-    gap: 2rem;
+    gap: 3rem;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.footer-content .logo {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
-    color: #fff;
+/* 3D Social Media Cube Styles */
+.footer-cube-container {
+    width: 60px;
+    height: 60px;
+    perspective: 400px;
+    margin: 0 4rem;
+}
+
+.footer-cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: footerCubeSpin 15s linear infinite;
+    cursor: grab;
+}
+
+.footer-cube:active {
+    cursor: grabbing;
+}
+
+.cube-face {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(209, 70, 30, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.cube-face a {
+    color: var(--text-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cube-face:hover {
+    background: rgba(209, 70, 30, 0.2);
+    border-color: var(--mars-orange);
+    box-shadow: 0 0 15px var(--mars-orange);
+}
+
+.cube-face svg {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease;
+}
+
+.cube-face:hover svg {
+    transform: scale(1.1);
+}
+
+.front  { transform: rotateY(0deg) translateZ(30px); }
+.back   { transform: rotateY(180deg) translateZ(30px); }
+.right  { transform: rotateY(90deg) translateZ(30px); }
+.left   { transform: rotateY(-90deg) translateZ(30px); }
+.top    { transform: rotateX(90deg) translateZ(30px); }
+.bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+@keyframes footerCubeSpin {
+    from { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    to { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
 }
 
 .footer-links {
